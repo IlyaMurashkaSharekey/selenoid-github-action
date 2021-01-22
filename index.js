@@ -7,7 +7,7 @@ const timeout = process.env.SESSION_TIMEOUT || '120s';
 
 console.log(`## DOWNLOADING CM AND STARTING SELENOID`);
 
-const args = `-service-startup-timeout ${startupTimeout} -session-attempt-timeout ${attemptTimeout} -session-delete-timeout ${deleteTimeout} -timeout ${timeout}`
+const args = `-limit 10 -service-startup-timeout ${startupTimeout} -session-attempt-timeout ${attemptTimeout} -session-delete-timeout ${deleteTimeout} -timeout ${timeout}`
 console.log(args);
 execSync(`curl -s https://aerokube.com/cm/bash | bash && ./cm selenoid start --args "${args}"`)
 
