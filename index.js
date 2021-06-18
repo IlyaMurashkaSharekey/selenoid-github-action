@@ -1,14 +1,12 @@
 const { execSync } = require("child_process");
+const core = require('@actions/core');
 
-const startupTimeout = process.env.SESSION_STARTUP_TIMEOUT || '60s';
-const attemptTimeout = process.env.SESSION_ATTEMPT_TIMEOUT || '60s';
-const deleteTimeout = process.env.SESSION_DELETE_TIMEOUT || '60s';
-const timeout = process.env.SESSION_TIMEOUT || '120s';
+// Empty string by default, which is fine for us
+const selenoidStartArgs = core.getInput('selenoid-start-arguments')
 
 console.log(`## DOWNLOADING CM AND STARTING SELENOID`);
 
-const args = `-service-startup-timeout ${startupTimeout} -session-attempt-timeout ${attemptTimeout} -session-delete-timeout ${deleteTimeout} -timeout ${timeout}`
-console.log(args);
-execSync(`curl -s https://aerokube.com/cm/bash | bash && ./cm selenoid start --args "${args}"`)
+execSync(`curl -s https://aerokube.com/cm/bash | bash && ./cm selenoid start ${selenoidStartArgs}`)
 
-console.log(`## DOWNLOADING CM AND STARTING SELENOID FINISHED`);
+
+console.log(`## SELENOID STARTED`);
