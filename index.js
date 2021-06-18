@@ -8,4 +8,5 @@ console.log(`## DOWNLOADING CM AND STARTING SELENOID`);
 
 execSync(`curl -s https://aerokube.com/cm/bash | bash && ./cm selenoid start ${selenoidStartArgs}`)
 
+
 console.log(`## SELENOID STARTED`);
